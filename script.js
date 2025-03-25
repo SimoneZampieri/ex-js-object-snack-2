@@ -51,7 +51,7 @@ const secondBurger2 = structuredClone(hamburger2);
 const thirdBurger = structuredClone(hamburger2);
 
 // Quanti oggetti sono stati creati in memoria durante l'esecuzione di questo codice?
-// Sono stati creati 3 oggetti
+// Sono stati creati 9 oggetti
 
 // 🏆 Code Question 4
 
@@ -108,7 +108,7 @@ console.log(secondBurger3.maker.restaurant.name); // Hyur's II
 
 // Senza lanciare il codice, riesci a prevedere cosa viene stampato in console?
 // Quanti oggetti sono stati creati in memoria durante l'esecuzione di questo codice?
-// Sono stati creati 3 oggetti
+// Sono stati creati 5 oggetti
 
 // 🎯 Code Question 6 (Bonus)
 
@@ -136,9 +136,28 @@ const chef = {
 };
 
 // Qual è il metodo migliore per clonare l’oggetto chef, e perché?
-// il metodo migliore è lo spread operator, poichè abbiamo una funzione all'interno dell'oggetto, inoltre crea un riferimento degli oggetti annidati
+// il metodo migliore è lo spread operator, poichè, conoscendo l'oggetto, abbiamo una funzione all'interno di esso, inoltre crea un riferimento degli oggetti annidati
 
 // 🎯 Snack  (Bonus)
 // Crea una funzione che permette la copia profonda (deep copy) di un oggetto, che copia anche i suoi metodi (proprietà che contengono funzioni). Usa l’oggetto di Code Question 6 come test.
 
 // ⚠️ Serve usare una funzione ricorsiva! (fai un po’ di ricerca).
+
+function deepCopy(obj) {
+  if (typeof obj !== "object") {
+    return obj;
+  }
+
+  const copy = {};
+
+  for (const key in obj) {
+    const value = obj[key];
+    if (typeof value !== "object") {
+      copy[key] = value;
+    } else {
+      copy[key] = deepCopy(value);
+    }
+  }
+}
+
+const chefCopy = deepCopy(chef);
